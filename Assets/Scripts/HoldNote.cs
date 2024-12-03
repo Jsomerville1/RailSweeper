@@ -20,6 +20,7 @@ public class HoldNote : MonoBehaviour
     [SerializeField] private Material perfectMat; // Perfect zone material
     [SerializeField] private Material lateMat;    // Late zone material
     [SerializeField] private Material holdingMat; // Material when the note is being held
+    [SerializeField] private Material clearGlass; // Default material
 
     public NoteZone currentZone = NoteZone.None; // Current zone of the note
     private NoteZone holdStartZone = NoteZone.None;
@@ -41,14 +42,24 @@ public class HoldNote : MonoBehaviour
 
     void Start()
     {
-        originalMaterial = GetComponent<Renderer>().material;
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.material = clearGlass;
+            originalMaterial = clearGlass;
+        }
+        else
+        {
+            Debug.LogError("HoldNote: Renderer component not found.");
+        }
+
         InitializeHoldNote();
 
         // **Retrieve input lag directly from PlayerPrefs**
         float inputLagMs = PlayerPrefs.GetFloat("InputLag", 0f);
         inputLagInSeconds = inputLagMs / 1000f; // Convert milliseconds to seconds
         Debug.Log($"HoldNote: Input lag set to {inputLagInSeconds} seconds.");
-        
+
         if (UIManager.Instance != null)
         {
             UIManager.Instance.OnUIOpened += OnUIOpened;
@@ -56,43 +67,43 @@ public class HoldNote : MonoBehaviour
         }
     }
 
+
     void Update()
     {
-        // **Do not process input if UI is active**
         if (isUIActive)
         {
             return;
         }
 
-        if (inHitZone && !isHoldCompleted)
+        if (!isHoldCompleted)
         {
-            HandleInput();
-
-            if (isHolding)
+            if (inHitZone)
             {
-                HandleHoldTick();
-                holdProgress += Time.deltaTime;
+                HandleInput();
 
-                // Check if the player has held the note for the expected duration
-                if (holdProgress >= expectedHoldDuration)
+                if (isHolding)
                 {
-                    isWaitingForRelease = true;
-                    waitStartTime = Time.time;
-                    isHolding = false; // Stop adding ticks
-                    UpdateMaterialBasedOnZone();
+                    HandleHoldTick();
+                    holdProgress += Time.deltaTime;
+
+                    if (holdProgress >= expectedHoldDuration)
+                    {
+                        isWaitingForRelease = true;
+                        waitStartTime = Time.time;
+                        isHolding = false;
+                        UpdateMaterialBasedOnZone();
+                    }
                 }
             }
-            else if (isWaitingForRelease)
+
+            if (isWaitingForRelease)
             {
-                // Waiting for the player to release the key
                 if (!Input.GetKey(KeyCode.Space))
                 {
-                    // Player released key in time
                     FinalizeHold();
                 }
-                else if ((Time.time - inputLagInSeconds) - waitStartTime >= maxReleaseTime)
+                else if ((Time.time - waitStartTime) >= maxReleaseTime)
                 {
-                    // Player failed to release in time
                     OnMiss();
                 }
             }
@@ -113,7 +124,7 @@ public class HoldNote : MonoBehaviour
     {
         // Calculate expected hold duration in seconds
         expectedHoldDuration = (endBeat - startBeat) * SongManager.Instance.secPerBeat;
-        maxReleaseTime = SongManager.Instance.secPerBeat * 1.5f; // Margin of error allowed for hold note successful hit (0.5 indicates half a beat)
+        maxReleaseTime = SongManager.Instance.secPerBeat * 1.0f; // Margin of error allowed for hold note successful hit (0.5 indicates half a beat)
         tickInterval = SongManager.Instance.secPerBeat * tickBeatFraction;
 
         // Set the scale based on the duration
@@ -231,6 +242,8 @@ public class HoldNote : MonoBehaviour
     private void OnMiss()
     {
         isHoldCompleted = true;
+        isWaitingForRelease = false;
+        isHolding = false;
         ScoreManager.Instance.Miss();
 
         if (MouseInputHandler.Instance != null)
@@ -285,7 +298,7 @@ public class HoldNote : MonoBehaviour
         if (other.CompareTag("HitZone"))
         {
             inHitZone = false;
-            if (!isHoldCompleted)
+            if (!isHoldCompleted && !isWaitingForRelease)
             {
                 OnMiss();
             }
@@ -336,7 +349,7 @@ public class HoldNote : MonoBehaviour
         canStartHold = true;
         holdTickTimer = 0f;
         totalHoldTime = 0f;
-        GetComponent<Renderer>().material = originalMaterial;
+        GetComponent<Renderer>().material = clearGlass;
     }
 
     private void OnUIOpened()
