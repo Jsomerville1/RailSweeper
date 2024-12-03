@@ -68,9 +68,7 @@ public class Note : MonoBehaviour
         CheckForFlash();
     }
 
-    /// <summary>
-    /// Coroutine to handle the flash effect.
-    /// </summary>
+    // Coroutine to handle the flash effect.
     IEnumerator FlashNote()
     {
         if (noteRenderer != null)
@@ -95,10 +93,7 @@ public class Note : MonoBehaviour
         }
     }
 
-
-    /// <summary>
-    /// Checks if the note should flash based on the song's current beat.
-    /// </summary>
+    // Checks if the note should flash based on the song's current beat.
     void CheckForFlash()
     {
         if (hasFlashed)
@@ -135,9 +130,8 @@ public class Note : MonoBehaviour
         noteRenderer.material.EnableKeyword("_EMISSION"); // Ensure emission is enabled
     }
 
-    /// <summary>
-    /// Sets movement parameters based on current combo. Assists 
-    /// </summary>
+
+    // Sets movement parameters based on current combo. Assists 
     public void AdjustMovementParameters()
     {
         if (gameSettings == null)
@@ -180,18 +174,15 @@ public class Note : MonoBehaviour
 
 
 
-    /// <summary>
-    /// Initializes the movement direction based on the assigned MovementDirection enum.
-    /// </summary>
+
+    // Initializes the movement direction based on the assigned MovementDirection enum.
     public void InitializeMovement()
     {
         spawnPosition = transform.position;
         moveDirection = GetDirectionVector(movementDirection);
     }
 
-    /// <summary>
-    /// Called when the note is successfully hit.
-    /// </summary>
+    // Called when the note is successfully hit.
     public void OnHit(NoteTiming timing, float offBeatDifference)
     {
         // Deregister from MouseInputHandler
@@ -229,10 +220,6 @@ public class Note : MonoBehaviour
             parentLane.RemoveNoteFromList(this);
         }
 
-        //Debug.Log($"Note at beat {beatOfThisNote} was missed.");
-
-        // Return the note to the object pool
-        //ObjectPool.Instance.ReturnObject(this.gameObject);
     }
     // Kept in case of old references. Not sure if needed ******
     public void OnHit()
@@ -240,18 +227,14 @@ public class Note : MonoBehaviour
         OnHit(NoteTiming.Perfect, 0f);
     }
 
-    /// <summary>
-    /// Moves the note in the assigned direction at the specified speed.
-    /// </summary>
+    // Moves the note in the assigned direction at the specified speed.
+
     private void MoveNote()
     {
         if (moveDirection == Vector3.zero)
         {
             return;
         }
-
-        // Adjust speed and distance based on combo and game difficulty
-        //AdjustMovementBasedOnCombo();
 
         float delta = movementSpeed * Time.deltaTime;
         transform.Translate(moveDirection * delta, Space.World);
@@ -285,9 +268,8 @@ public class Note : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// Reverses the movement direction once the note reaches the movement distance limit.
-    /// </summary>
+
+    // Reverses the movement direction once the note reaches the movement distance limit.
     private void ReverseMovementDirection()
     {
         moveDirection = -moveDirection;
@@ -317,9 +299,8 @@ private Vector3 GetDirectionVector(MovementDirection direction)
             return Vector3.zero;
     }
 }
-    /// <summary>
-    /// Detects when the note enters the HitZone.
-    /// </summary>
+
+    // Detects when the note enters the HitZone.
     void OnTriggerEnter(Collider other)
     {
         // Check for "HitZone" and set note canBePressed to true
@@ -360,9 +341,8 @@ private Vector3 GetDirectionVector(MovementDirection direction)
     }
 
 
-    /// <summary>
-    /// Detects when the note exits the HitZone without being hit.
-    /// </summary>
+
+    // Detects when the note exits the HitZone without being hit.
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("HitZone"))
@@ -382,18 +362,10 @@ private Vector3 GetDirectionVector(MovementDirection direction)
             // Return the note to the object pool
             ObjectPool.Instance.ReturnObject(this.gameObject);
         }
-/*
-        // reset currentZone when exiting hitzone
-        if (other.CompareTag("Early") || other.CompareTag("Perfect") || other.CompareTag("Late"))
-        {
-            currentZone = NoteZone.None;
-        }
-*/
     }
 
-    /// <summary>
-    /// Resets the note to its initial state. Useful if using object pooling.
-    /// </summary>
+
+    // Resets the note to its initial state. Useful if using object pooling.
     public void ResetNote()
     {
         noteRenderer.material = clearGlass;
@@ -431,9 +403,8 @@ private Vector3 GetDirectionVector(MovementDirection direction)
 
 
 #if UNITY_EDITOR
-    /// <summary>
-    /// Visualizes the note's position in the editor.
-    /// </summary>
+
+    // Visualizes the note's position in the editor.
     void OnDrawGizmosSelected()
     {
         if (parentLane == null || parentLane.hitZoneTransform == null)

@@ -2,7 +2,7 @@ using UnityEngine;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
 using System.Collections;
-using UnityEngine.SceneManagement;
+
 public class SongManager : MonoBehaviour
 {
     public static SongManager Instance;
@@ -120,14 +120,9 @@ public class SongManager : MonoBehaviour
         // Start a delayed coroutine for the music and note spawning
         StartCoroutine(PreloadAndStartMusic());
 
-        // Calculate and assign train speed based on distance between notes and BPM
-        //TrainController.Instance.SetSpeed(distanceBetweenNotes, bpm);
-
     }
 
-    /// <summary>
-    /// Coroutine to preload music and start it after a delay.
-    /// </summary>
+    // Coroutine to preload music and start it after a delay.
     IEnumerator PreloadAndStartMusic()
     {
         // Check if the AudioSource is assigned
@@ -172,9 +167,8 @@ public class SongManager : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// Returns the current song position in beats based on dspTime.
-    /// </summary>
+
+    // Returns the current song position in beats based on dspTime.
     public float GetSongPositionInBeats()
     {
         if (!isPlaying || musicSource == null || PauseMenu.GamePaused)

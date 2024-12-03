@@ -28,9 +28,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Call this method when a UI panel is opened.
-    /// </summary>
     public void OpenUIPanel()
     {
         activeUIPanels++;
@@ -41,9 +38,6 @@ public class UIManager : MonoBehaviour
         OnUIOpened?.Invoke();
     }
 
-    /// <summary>
-    /// Call this method when a UI panel is closed.
-    /// </summary>
     public void CloseUIPanel()
     {
         activeUIPanels = Mathf.Max(activeUIPanels - 1, 0);
@@ -54,17 +48,15 @@ public class UIManager : MonoBehaviour
         OnUIClosed?.Invoke();
     }
 
-    /// <summary>
-    /// Determines whether any UI panel is currently active.
-    /// </summary>
+
+    // Determines whether any UI panel is currently active.
     public bool IsAnyUIPanelActive()
     {
         return activeUIPanels > 0;
     }
 
-    /// <summary>
-    /// Updates the cursor visibility and lock state based on UI activity.
-    /// </summary>
+
+    // Updates the cursor visibility and lock state based on UI activity.
     private void UpdateCursorState()
     {
         if (IsAnyUIPanelActive())

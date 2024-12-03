@@ -7,9 +7,8 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuUI; // Assign your pause panel in the Inspector
     [SerializeField] private bool isPaused = false;
-    /// <summary>
-    /// Tracks paused state for reference elsewhere in codebase
-    /// </summary>
+
+    // Tracks paused state for reference elsewhere in codebase
     public static bool GamePaused = false;
 
     public Button resume, quit, restart, returnToMain;
@@ -204,19 +203,17 @@ public class PauseMenu : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    /// <summary>
-    /// Event handler for when a UI panel is opened.
-    /// Disables certain functionalities if necessary.
-    /// </summary>
+
+    // Event handler for when a UI panel is opened.
+    // Disables certain functionalities if necessary.
     private void OnUIOpened()
     {
         isUIActive = true;
     }
 
-    /// <summary>
-    /// Event handler for when a UI panel is closed.
-    /// Enables certain functionalities if necessary.
-    /// </summary>
+
+    // Event handler for when a UI panel is closed.
+    // Enables certain functionalities if necessary.
     private void OnUIClosed()
     {
         isUIActive = false;

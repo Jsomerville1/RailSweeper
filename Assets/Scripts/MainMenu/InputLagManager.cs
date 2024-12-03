@@ -51,10 +51,8 @@ public class InputLagManager : MonoBehaviour
     }
 
 
-    /// <summary>
+
     /// Retrieves the input lag from PlayerPrefs and converts it to seconds.
-    /// </summary>
-    /// <returns>Input lag in seconds.</returns>
     public float GetInputLagInSeconds()
     {
         float inputLagMs = PlayerPrefs.GetFloat("InputLag", 0f);
@@ -89,10 +87,9 @@ public class InputLagManager : MonoBehaviour
         settingsVolumeSlider.onValueChanged.AddListener(OnVolumeSliderChanged);
     }
     
-    /// <summary>
-    /// Loads the metronome MIDI file and extracts the beat times.
-    /// Assumes that the MIDI file's notes are already in chronological order.
-    /// </summary>
+
+    // Loads the metronome MIDI file and extracts the beat times.
+    // Assumes that the MIDI file's notes are already in chronological order.
     void LoadMetronomeBeats()
     {
         try
@@ -118,10 +115,9 @@ public class InputLagManager : MonoBehaviour
         }
     }
     
-    /// <summary>
-    /// Handler for the Start Beat Button click.
-    /// Begins the calibration process with a countdown.
-    /// </summary>
+
+    // Handler for the Start Beat Button click.
+    // Begins the calibration process with a countdown.
     void OnStartBeatButtonClicked()
     {
         if (!isCalibrating)
@@ -130,9 +126,8 @@ public class InputLagManager : MonoBehaviour
         }
     }
     
-    /// <summary>
-    /// Coroutine for the countdown before calibration starts.
-    /// </summary>
+
+    // Coroutine for the countdown before calibration starts.
     IEnumerator CalibrationCountdown()
     {
         isCalibrating = true;
@@ -175,10 +170,8 @@ public class InputLagManager : MonoBehaviour
         isCalibrating = false;
     }
     
-    /// <summary>
-    /// Handler for the Offset Button click.
-    /// Records the player's click time and calculates the delay.
-    /// </summary>
+    // Handler for the Offset Button click.
+    // Records the player's click time and calculates the delay.
     void OnOffsetButtonClicked()
     {
         if (currentBeatIndex < numberOfBeatsToMeasure && currentBeatIndex < beatTimes.Count)
@@ -213,10 +206,9 @@ public class InputLagManager : MonoBehaviour
         }
     }
     
-    /// <summary>
-    /// Calculates the average input lag and updates the UI.
-    /// Also updates the inputLagInputField and averageDelayText to reflect the measured delay.
-    /// </summary>
+
+    // Calculates the average input lag and updates the UI.
+    // Also updates the inputLagInputField and averageDelayText to reflect the measured delay.
     void CalculateAndDisplayAverageDelay()
     {
         if (playerClickTimes.Count == 0)
@@ -244,9 +236,7 @@ public class InputLagManager : MonoBehaviour
         ResumeMenuMusic();
     }
     
-    /// <summary>
-    /// Resumes the MenuMusic AudioSource.
-    /// </summary>
+    // Resumes the MenuMusic AudioSource
     void ResumeMenuMusic()
     {
         if (menuMusic != null)
@@ -261,11 +251,10 @@ public class InputLagManager : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// Handler for the Settings Apply Button click.
-    /// Saves the input lag and volume values from the input field and slider,
-    /// then returns to the main menu.
-    /// </summary>
+
+    // Handler for the Settings Apply Button click.
+    // Saves the input lag and volume values from the input field and slider,
+    // then returns to the main menu.
     void OnSettingsApplyClicked()
     {
         // Parse the inputLagInputField text to a float
@@ -306,19 +295,16 @@ public class InputLagManager : MonoBehaviour
         }
     }
     
-    /// <summary>
-    /// Handler for the Volume Slider value change.
-    /// Updates the game volume in real-time.
-    /// </summary>
+
+    // Handler for the Volume Slider value change.
+    // Updates the game volume in real-time.
     void OnVolumeSliderChanged(float value)
     {
         UpdateGameVolume(value);
     }
     
-    /// <summary>
-    /// Updates the overall game volume.
-    /// </summary>
-    /// <param name="volume">Volume value between 0 and 1.</param>
+
+    // Updates the overall game volume.
     void UpdateGameVolume(float volume)
     {
         AudioListener.volume = volume;

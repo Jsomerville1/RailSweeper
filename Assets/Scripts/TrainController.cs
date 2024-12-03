@@ -39,11 +39,8 @@ public class TrainController : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// Sets the train's speed based on distanceBetweenNotes and BPM.
-    /// </summary>
-    /// <param name="distanceBetweenNotes">Distance between consecutive notes in units.</param>
-    /// <param name="bpm">Beats per minute of the song.</param>
+
+    // Sets the train's speed based on distanceBetweenNotes and BPM.
     public void SetSpeed(float distanceBetweenNotes, float bpm)
     {
         if (bpm <= 0f || distanceBetweenNotes <= 0f)

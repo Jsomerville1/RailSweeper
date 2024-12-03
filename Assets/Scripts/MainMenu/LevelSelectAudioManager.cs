@@ -31,10 +31,7 @@ public class LevelSelectAudioManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Plays the given sample clip and pauses the menu music.
-    /// </summary>
-    /// <param name="clip">The sample AudioClip to play.</param>
+    // Plays the given sample clip and pauses the menu music.
     public void PlaySampleClip(AudioClip clip)
     {
         // Pause the menu music
@@ -61,9 +58,8 @@ public class LevelSelectAudioManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Stops the sample clip and resumes the menu music.
-    /// </summary>
+
+    // Stops the sample clip and resumes the menu music.
     public void StopSampleClip()
     {
         // Stop the sample clip

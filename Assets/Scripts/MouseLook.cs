@@ -53,9 +53,8 @@ public class MouseLook : MonoBehaviour
         HandleMouseInput();
     }
 
-    /// <summary>
-    /// Processes mouse movement input to rotate the camera.
-    /// </summary>
+
+    // Processes mouse movement input to rotate the camera.
     private void HandleMouseInput()
     {
         // Get mouse movement input
@@ -73,37 +72,31 @@ public class MouseLook : MonoBehaviour
         transform.rotation = Quaternion.Euler(pitch, yaw, 0f);
     }
 
-    /// <summary>
-    /// Locks the cursor and hides it.
-    /// </summary>
+
+    // Locks the cursor and hides it.
     private void LockCursor()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    /// <summary>
-    /// Unlocks the cursor and makes it visible.
-    /// </summary>
+    // Unlocks the cursor and makes it visible.
     private void UnlockCursor()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
-    /// <summary>
-    /// Event handler for when a UI panel is opened.
-    /// Unlocks the cursor and disables mouse look.
-    /// </summary>
+
+    // Event handler for when a UI panel is opened.
+    // Unlocks the cursor and disables mouse look.
     private void OnUIOpened()
     {
         UnlockCursor();
     }
 
-    /// <summary>
-    /// Event handler for when a UI panel is closed.
-    /// Locks the cursor and enables mouse look.
-    /// </summary>
+    // Event handler for when a UI panel is closed.
+    // Locks the cursor and enables mouse look.
     private void OnUIClosed()
     {
         LockCursor();

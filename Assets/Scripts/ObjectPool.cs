@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Manages a pool of reusable GameObjects to optimize performance.
-/// </summary>
+
+// Manages a pool of reusable GameObjects to optimize performance.
 public class ObjectPool : MonoBehaviour
 {
     public static ObjectPool Instance;
@@ -26,9 +25,8 @@ public class ObjectPool : MonoBehaviour
         InitializePool();
     }
 
-    /// <summary>
-    /// Initializes the object pool by pre-instantiating objects.
-    /// </summary>
+
+    // Initializes the object pool by pre-instantiating objects.
     private void InitializePool()
     {
         for (int i = 0; i < poolSize; i++)
@@ -41,10 +39,7 @@ public class ObjectPool : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// Retrieves an object from the pool.
-    /// </summary>
-    /// <returns>A pooled GameObject.</returns>
+    // Retrieves an object from the pool.
     public GameObject GetObject()
     {
         if (poolQueue.Count > 0)
@@ -61,10 +56,8 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Returns an object to the pool.
-    /// </summary>
-    /// <param name="obj">GameObject to return.</param>
+
+    // Returns an object to the pool.
     public void ReturnObject(GameObject obj)
     {
         // Ensure the object is indeed part of this pool

@@ -271,9 +271,8 @@ public class ScoreManager : MonoBehaviour
         UpdateUI();
     }
 
-    /// <summary>
-    /// Updates the score and combo UI elements.
-    /// </summary>
+
+    // Updates the score and combo UI elements.
     void UpdateUI()
     {
         if (scoreText != null)

@@ -3,9 +3,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Manages the level selection UI by updating star images based on saved completion data.
-/// </summary>
+// Manages the level selection UI by updating star images based on saved completion data.
 public class LevelSelectionManager : MonoBehaviour
 {
     [Header("Levels")]
@@ -28,10 +26,7 @@ public class LevelSelectionManager : MonoBehaviour
         UpdateStarUI(playerStats);
     }
 
-    /// <summary>
-    /// Loads the player stats from the JSON file.
-    /// </summary>
-    /// <returns>Deserialized PlayerStats object.</returns>
+    // Loads the player stats from the JSON file.
     PlayerStats LoadPlayerStats()
     {
         if (File.Exists(statsFilePath))
@@ -55,10 +50,8 @@ public class LevelSelectionManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Updates the star images in the UI based on LevelCompletionData.
-    /// </summary>
-    /// <param name="playerStats">The player's statistics.</param>
+
+    // Updates the star images in the UI based on LevelCompletionData.
     void UpdateStarUI(PlayerStats playerStats)
     {
         foreach (LevelUI levelUI in levelsUI)
@@ -89,14 +82,7 @@ public class LevelSelectionManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Sets the star sprites for a given level UI.
-    /// </summary>
-    /// <param name="levelUI">The LevelUI instance.</param>
-    /// <param name="easy">Easy difficulty completion status.</param>
-    /// <param name="normal">Normal difficulty completion status.</param>
-    /// <param name="hard">Hard difficulty completion status.</param>
-    /// <param name="expert">Expert difficulty completion status.</param>
+    // Sets the star sprites for a given level UI.
     void SetStarSprites(LevelUI levelUI, bool easy, bool normal, bool hard, bool expert)
     {
         if (levelUI.easyStar != null)
@@ -134,9 +120,8 @@ public class LevelSelectionManager : MonoBehaviour
 
 }
 
-/// <summary>
-/// Represents the UI components for a single level in the level selection.
-/// </summary>
+
+// Represents the UI components for a single level in the level selection.
 [System.Serializable]
 public class LevelUI
 {

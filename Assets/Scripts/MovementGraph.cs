@@ -66,61 +66,47 @@ public class MovementGraph
         AddEdge(6, 1);  // UpLeft back to Up (closing the loop)
 
         // Spiral Pattern Edges (Layer 2)
-        AddEdge(1, 9);    // Up to Up (Layer 2)
-        AddEdge(9, 13);   // Up (Layer 2) to UpRight (Layer 2)
-        AddEdge(13, 10);  // UpRight (Layer 2) to Right (Layer 2)
-        AddEdge(10, 15);  // Right (Layer 2) to DownRight (Layer 2)
-        AddEdge(15, 11);  // DownRight (Layer 2) to Down (Layer 2)
-        AddEdge(11, 16);  // Down (Layer 2) to DownLeft (Layer 2)
-        AddEdge(16, 12);  // DownLeft (Layer 2) to Left (Layer 2)
-        AddEdge(12, 14);  // Left (Layer 2) to UpLeft (Layer 2)
-        AddEdge(14, 9);   // UpLeft (Layer 2) back to Up (Layer 2) (closing the loop)
+        AddEdge(1, 9);
+        AddEdge(9, 13);
+        AddEdge(13, 10);
+        AddEdge(10, 15);
+        AddEdge(15, 11);
+        AddEdge(11, 16);
+        AddEdge(16, 12);
+        AddEdge(12, 14);
+        AddEdge(14, 9);
 
         // Connect layers for smooth transitions
-        AddEdge(5, 13);   // UpRight to UpRight (Layer 2)
-        AddEdge(2, 10);   // Right to Right (Layer 2)
-        AddEdge(7, 15);   // DownRight to DownRight (Layer 2)
-        AddEdge(3, 11);   // Down to Down (Layer 2)
-        AddEdge(8, 16);   // DownLeft to DownLeft (Layer 2)
-        AddEdge(4, 12);   // Left to Left (Layer 2)
-        AddEdge(6, 14);   // UpLeft to UpLeft (Layer 2)
-
-        // Zigzag Pattern Edges
-        // Original Zigzag Pattern:
-        // AddEdge(0, 2);    // Origin to Right
-        // AddEdge(2, 4);    // Right to Left
-        // AddEdge(4, 2);    // Left back to Right
-        // AddEdge(2, 0);    // Return to Origin
+        AddEdge(5, 13);
+        AddEdge(2, 10);
+        AddEdge(7, 15);
+        AddEdge(3, 11);
+        AddEdge(8, 16);
+        AddEdge(4, 12);
+        AddEdge(6, 14); 
 
         // Updated Zigzag Pattern with Intermediary Nodes
-        AddEdge(0, 2);    // Origin to Right
-        AddEdge(2, 17);   // Right to Middle Right
-        AddEdge(17, 0);   // Middle Right to Origin
-        AddEdge(0, 4);    // Origin to Left
-        AddEdge(4, 18);   // Left to Middle Left
-        AddEdge(18, 0);   // Middle Left to Origin
-        AddEdge(0, 2);    // Origin to Right
-        AddEdge(2, 17);   // Right to Middle Right
-        AddEdge(17, 0);   // Middle Right to Origin
-        AddEdge(0, 4);    // Origin to Left
-        AddEdge(4, 18);   // Left to Middle Left
-        AddEdge(18, 0);   // Middle Left to Origin
-
-        // Diagonal Pattern Edges
-        // Original Diagonal Pattern:
-        // AddEdge(0, 5);    // Origin to UpRight
-        // AddEdge(5, 8);    // UpRight to DownLeft
-        // AddEdge(8, 5);    // DownLeft back to UpRight
-        // AddEdge(5, 0);    // Return to Origin
+        AddEdge(0, 2);
+        AddEdge(2, 17);
+        AddEdge(17, 0); 
+        AddEdge(0, 4); 
+        AddEdge(4, 18);  
+        AddEdge(18, 0); 
+        AddEdge(0, 2); 
+        AddEdge(2, 17); 
+        AddEdge(17, 0);
+        AddEdge(0, 4); 
+        AddEdge(4, 18); 
+        AddEdge(18, 0);  
 
         // Updated Diagonal Pattern with Intermediary Nodes
-        AddEdge(0, 5);    // Origin to UpRight
-        AddEdge(5, 21);   // UpRight to Middle UpRight
-        AddEdge(21, 8);   // Middle UpRight to DownLeft
-        AddEdge(8, 24);   // DownLeft to Middle DownLeft
-        AddEdge(24, 5);   // Middle DownLeft to UpRight
-        AddEdge(5, 21);   // UpRight to Middle UpRight
-        AddEdge(21, 0);   // Middle UpRight to Origin
+        AddEdge(0, 5);
+        AddEdge(5, 21);
+        AddEdge(21, 8); 
+        AddEdge(8, 24);
+        AddEdge(24, 5); 
+        AddEdge(5, 21); 
+        AddEdge(21, 0);
     }
 
     private void AddEdge(int fromId, int toId)
